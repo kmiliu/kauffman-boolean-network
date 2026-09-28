@@ -1,3 +1,6 @@
 Core simulation validation: Python 3.14.7
 Standard-library simulation and 5 regression tests passed.
-Plot rendering not executed: dependency downloads repeatedly interrupted.
+Plot rendering: user ran run_analysis.py locally and supplied outputs/sensitivity.png.
+The supplied figure was visually checked against the recorded summary and counts.
+The plotting environment package versions were not recorded.
+The Agg non-interactive warning affects window display, not the saved PNG.

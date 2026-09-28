@@ -18,6 +18,10 @@ The default run uses seed **42**, **20 independently generated networks** at eac
 
 The table and [machine-readable results](outputs/results.json) are produced by the corrected notebook. Per-network rates are included for inspection. This is a finite simulation of the specified ensemble, not evidence about a particular biological regulatory network.
 
+![Seeded sensitivity and cascade simulation](outputs/sensitivity.png)
+
+The lower-right pie chart includes only the **105 mutations that changed the attractor**: 58 changed states without changing cycle length (55.2%), and 47 changed cycle length (44.8%). The 45 mutations that left the attractor unchanged are excluded. The lower-left histogram summarizes only the 58 equal-length changed cycles.
+
 ## Reproduce
 
 Use Python 3.10 or newer in an isolated environment:
@@ -30,7 +34,7 @@ python -m unittest discover -s tests -v
 python run_analysis.py
 ```
 
-`run_analysis.py` executes the notebook's code cells in order and writes `outputs/sensitivity.png` and `outputs/results.json`. For interactive exploration, open `kauffman-boolean-network.ipynb` in a notebook editor with the same environment and run all cells from a fresh kernel. The execution cell resets the seed; changing parameters or the random-call sequence changes the result. Exact versions used for validation are recorded in `outputs/environment.txt`.
+`run_analysis.py` executes the notebook's code cells in order and writes `outputs/sensitivity.png` and `outputs/results.json`. For interactive exploration, open `kauffman-boolean-network.ipynb` in a notebook editor with the same environment and run all cells from a fresh kernel. The execution cell resets the seed; changing parameters or the random-call sequence changes the result. Validation details and known environment information are recorded in `outputs/environment.txt`. The command-line runner saves the figure without opening a window; an Agg non-interactive warning from `plt.show()` does not prevent the earlier image save.
 
 ## Interpreting the summaries
 
@@ -44,7 +48,7 @@ python run_analysis.py
 
 The original notebook included the repeated terminal state in attractor comparisons and recomputed a cycle length after appending it. The updated code excludes that endpoint and retains the first detected cycle length. Regression tests cover fixed points, two-cycles, rotation invariance, and cycle-length bookkeeping.
 
-Old cached output has been cleared because it used the earlier cycle handling and labeled a 50% comparison as significant. The committed table and JSON are newly generated simulation artifacts, not relabeled historical results. No external or private data is needed.
+Old cached output has been cleared because it used the earlier cycle handling and labeled a 50% comparison as significant. The committed figure, table, and JSON are newly generated simulation artifacts, not relabeled historical results. No external or private data is needed.
 
 | File | Purpose |
 | --- | --- |
@@ -52,4 +56,4 @@ Old cached output has been cleared because it used the earlier cycle handling an
 | `run_analysis.py` | Sequential execution without a notebook server |
 | `tests/test_cycles.py` | Attractor and summary regression checks |
 | `requirements.txt` | Runtime and notebook dependencies |
-| `outputs/` | Trial rates and validation environment; figures are generated on execution |
+| `outputs/` | Generated figure, trial rates, and validation notes |
