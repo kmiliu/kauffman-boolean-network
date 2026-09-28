@@ -1,0 +1,3 @@
+Core simulation validation: Python 3.14.7
+Standard-library simulation and 5 regression tests passed.
+Plot rendering not executed: dependency downloads repeatedly interrupted.
